@@ -1,7 +1,7 @@
 import React from 'react';
 import ActionsButtons from '../ActionsButtons/ActionsButtons';
 
-const MembersTable = () => {
+const MembersTable = ({ members }) => {
   return (
     <div>
       <table>
@@ -14,27 +14,18 @@ const MembersTable = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Name 1</td>
-            <td>name1@email.com</td>
-            <td>
-              <ActionsButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Name 2</td>
-            <td>name2@email.com</td>
-            <td>
-              <ActionsButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Name 3</td>
-            <td>name3@email.com</td>
-            <td>
-              <ActionsButtons />
-            </td>
-          </tr>
+          {members &&
+            members.map((member) => {
+              return (
+                <tr key={member.id}>
+                  <td>{member.name}</td>
+                  <td>{member.email}</td>
+                  <td>
+                    <ActionsButtons />
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
