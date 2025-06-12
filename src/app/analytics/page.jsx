@@ -21,15 +21,15 @@ export default function Analytics() {
 
   return (
     <main>
-      {analysis.map((item) => {
+      {analysis.map((item, index) => {
         return (
-          <>
+          <div key={index}>
             <QuestionAverage
               key={item.question}
               question={item.question}
               average={item.average}
             />
-          </>
+          </div>
         );
       })}
       <button>Download report</button>
