@@ -1,5 +1,10 @@
+'use client';
+
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import reducer from '@/redux/reducer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -11,17 +16,18 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata = {
-  title: 'Survey Next App',
-  description: 'Survey Tool by create next app',
-};
+const store = configureStore({
+  reducer,
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <Provider store={store}>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          {children}
+        </body>
+      </Provider>
     </html>
   );
 }
