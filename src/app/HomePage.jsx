@@ -1,11 +1,13 @@
 import React from 'react';
 
-import Hello from '@/components/Hello/Hello';
+import MemberInput from '@/components/MemberInput/MemberInput';
+import MembersTable from '@/components/MembersTable/MembersTable';
 
 const HomePage = () => {
   return (
     <main>
-      <Hello message={'✨ Skill up leader ✨'} />
+      <MemberInput />
+      <MembersTable />
     </main>
   );
 };
