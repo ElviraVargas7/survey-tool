@@ -1,0 +1,9 @@
+@use '@/scss/index' as *;
+
+.hello {
+  $text-color: $st-patricks-blue;
+
+  &__message {
+    color: $text-color;
+  }
+}
