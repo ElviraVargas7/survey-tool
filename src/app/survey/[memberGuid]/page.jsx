@@ -1,5 +1,6 @@
 'use client';
 
+import './SurveyPage.scss';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Question from '@/components/Question/Question';
@@ -46,29 +47,39 @@ export default function SurveyPage() {
   console.log('memberDetails', memberDetails);
 
   return (
-    <main>
+    <main className="survey">
       {memberDetails.has_answers ? (
-        <Typography>We've received your answer</Typography>
+        <Typography className="survey__thankyou">
+          We've received your answer
+        </Typography>
       ) : (
         <>
-          <h1>Survey for {memberDetails.name}</h1>
-          {questions ? (
-            questions.map((item) => {
-              return (
-                <Question
-                  key={item.id}
-                  questionId={item.id}
-                  questionText={item.question}
-                  onAnswer={handleAnswersChange}
-                />
-              );
-            })
-          ) : (
-            <p>Loading...</p>
-          )}
+          <h1 className="survey__title">Survey for {memberDetails.name}</h1>
+
+          <section className="survey__questions">
+            {questions ? (
+              questions.map((item) => (
+                <div key={item.id} className="survey__question">
+                  <Question
+                    questionId={item.id}
+                    questionText={item.question}
+                    onAnswer={handleAnswersChange}
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="survey__loading">Loading...</p>
+            )}
+          </section>
 
           {answers.length === questions?.length && (
-            <Button onClick={handleSubmitAnswers}>Submit Answers</Button>
+            <Button
+              variant="contained"
+              onClick={handleSubmitAnswers}
+              className="survey__submit"
+            >
+              Submit Answers
+            </Button>
           )}
         </>
       )}

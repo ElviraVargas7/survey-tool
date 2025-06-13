@@ -1,3 +1,4 @@
+import './Question.scss';
 import React, { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
@@ -30,11 +31,11 @@ const Question = ({ questionId, questionText, onAnswer }) => {
   };
 
   return (
-    <>
-      <h2>{questionText}</h2>
-      <Box sx={{ width: 200, display: 'flex', alignItems: 'center' }}>
+    <div className="question">
+      <h2 className="question__text">{questionText}</h2>
+      <div className="question__rating-wrapper">
         <Rating
-          name="hover-feedback"
+          name={`rating-${questionId}`}
           value={rating}
           precision={0.5}
           getLabelText={getLabelText}
@@ -42,13 +43,17 @@ const Question = ({ questionId, questionText, onAnswer }) => {
           onChangeActive={(event, newHover) => {
             setHover(newHover);
           }}
-          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+          emptyIcon={
+            <StarIcon className="question__star-empty" fontSize="inherit" />
+          }
         />
         {rating !== null && (
-          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : rating]}</Box>
+          <span className="question__label">
+            {labels[hover !== -1 ? hover : rating]}
+          </span>
         )}
-      </Box>
-    </>
+      </div>
+    </div>
   );
 };
 

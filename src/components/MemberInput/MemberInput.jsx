@@ -1,3 +1,4 @@
+import './MemberInput.scss';
 import { createMember } from '@/redux/actions/membersActions';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -41,32 +42,39 @@ const MemberInput = ({ members }) => {
   };
 
   return (
-    <div>
-      <Input
-        type="text"
-        placeholder="Names"
-        value={member.name}
-        onChange={handleNamesChange}
-      />
-      <Input
-        type="email"
-        placeholder="Email"
-        value={member.email}
-        onChange={handleEmailChange}
-      />
-      <Button
-        variant="contained"
-        onClick={handleCreateMember}
-        disabled={member.email == '' || member.name == '' || isMaxMembersLength}
-      >
-        Create
-      </Button>
+    <form className="member-input" onSubmit={handleCreateMember}>
+      <div className="member-input__group">
+        <Input
+          type="text"
+          placeholder="Names"
+          value={member.name}
+          onChange={handleNamesChange}
+          className="member-input__input"
+        />
+        <Input
+          type="email"
+          placeholder="Email"
+          value={member.email}
+          onChange={handleEmailChange}
+          className="member-input__input"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          className="member-input__button"
+          disabled={
+            member.email === '' || member.name === '' || isMaxMembersLength
+          }
+        >
+          Create
+        </Button>
+      </div>
       {isMaxMembersLength && (
-        <Typography gutterBottom sx={{ color: 'red', fontSize: 14 }}>
+        <Typography className="member-input__warning">
           You've reached max amount of members
         </Typography>
       )}
-    </div>
+    </form>
   );
 };
 
