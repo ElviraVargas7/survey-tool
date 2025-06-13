@@ -20,6 +20,7 @@ const HomePage = () => {
   const analysis = useSelector(selectAverageAnalysis);
 
   const isSurveyComplete =
+    analysis.length > 0 &&
     analysis.filter((item) => item.responses < 3).length == 0;
 
   useEffect(() => {

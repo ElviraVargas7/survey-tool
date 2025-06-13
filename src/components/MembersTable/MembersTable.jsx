@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import ActionsButtons from '../ActionsButtons/ActionsButtons';
 
 const MembersTable = ({ members }) => {
+  console.log(members);
   return (
     <div>
       <TableContainer component={Paper}>
@@ -20,6 +21,7 @@ const MembersTable = ({ members }) => {
             <TableRow>
               <TableCell>Names</TableCell>
               <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Has answered</TableCell>
               <TableCell align="right">Survey link</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
@@ -34,6 +36,9 @@ const MembersTable = ({ members }) => {
                   {member.name}
                 </TableCell>
                 <TableCell align="right">{member.email}</TableCell>
+                <TableCell align="right">
+                  {member.has_answers ? 'Yes' : 'No'}
+                </TableCell>
                 <TableCell align="right">
                   <Tooltip title="Copy link">
                     <IconButton
