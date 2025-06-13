@@ -29,13 +29,14 @@ const HomePage = () => {
   return (
     <main>
       <MemberInput members={members} />
-      <MembersTable members={members} />
 
       <Box mt={4}>
         <Button variant="contained" color="primary" onClick={handleRedirect}>
           Go to Analytics
         </Button>
       </Box>
+
+      <MembersTable members={members} />
     </main>
   );
 };

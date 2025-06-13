@@ -6,6 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import ActionsButtons from '../ActionsButtons/ActionsButtons';
 
 const MembersTable = ({ members }) => {
@@ -17,6 +20,7 @@ const MembersTable = ({ members }) => {
             <TableRow>
               <TableCell>Names</TableCell>
               <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Survey link</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -30,6 +34,20 @@ const MembersTable = ({ members }) => {
                   {member.name}
                 </TableCell>
                 <TableCell align="right">{member.email}</TableCell>
+                <TableCell align="right">
+                  <Tooltip title="Copy link">
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `http://localhost:3000/survey/${member.id}`
+                        );
+                      }}
+                    >
+                      <ContentCopyIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                </TableCell>
                 <TableCell align="right">
                   <ActionsButtons memberEmail={member.email} />
                 </TableCell>
