@@ -8,6 +8,8 @@ import {
 import {
   DELETE_MEMBER_FAILURE,
   DELETE_MEMBER_SUCCESS,
+  GET_MEMBER_DETAILS_FAILURE,
+  GET_MEMBER_DETAILS_SUCCESS,
   GET_MEMBERS_FAILURE,
   GET_MEMBERS_SUCCESS,
   selectCurrentMembers,
@@ -38,6 +40,35 @@ export const getMembers = () => async (dispatch) => {
 
     return {
       getMembersSuccessful: false,
+    };
+  } finally {
+    dispatch(unsetAppLoadingState());
+  }
+};
+
+export const getMemberDetails = (guid) => async (dispatch) => {
+  try {
+    dispatch(setAppLoadingState());
+    const { data: member } = await get(`/members/${guid}`);
+
+    console.log('member action', member);
+
+    dispatch({
+      type: GET_MEMBER_DETAILS_SUCCESS,
+      payload: member,
+    });
+
+    return {
+      getMemberDetailsSuccessful: true,
+    };
+  } catch {
+    dispatch({
+      type: GET_MEMBER_DETAILS_FAILURE,
+      payload: {},
+    });
+
+    return {
+      getMemberDetailsSuccessful: false,
     };
   } finally {
     dispatch(unsetAppLoadingState());
