@@ -1,5 +1,6 @@
 'use client';
 
+import './HomePage.scss';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Box, Typography } from '@mui/material';
@@ -37,29 +38,42 @@ const HomePage = () => {
   };
 
   return (
-    <main>
-      <MemberInput members={members} />
+    <main className="home">
+      <section className="home__inputs">
+        <MemberInput members={members} />
+      </section>
 
-      <MembersTable members={members} />
+      <section className="home__table">
+        <MembersTable members={members} />
+      </section>
 
-      {isSurveyComplete ? (
-        <>
-          {analysis.map((item, index) => {
-            return (
-              <div key={index}>
-                <QuestionAverage
-                  key={item.question}
-                  question={item.question}
-                  average={item.average_rate}
-                />
-              </div>
-            );
-          })}
-          <Button onClick={handleDownloadReport}>Download report</Button>
-        </>
-      ) : (
-        <Typography>There are still members without answering</Typography>
-      )}
+      <section className="home__analysis">
+        {isSurveyComplete ? (
+          <>
+            <div className="home__questions">
+              {analysis.map((item, index) => (
+                <div className="home__question" key={index}>
+                  <QuestionAverage
+                    question={item.question}
+                    average={item.average_rate}
+                  />
+                </div>
+              ))}
+            </div>
+            <Button
+              className="home__download"
+              variant="contained"
+              onClick={handleDownloadReport}
+            >
+              Download report
+            </Button>
+          </>
+        ) : (
+          <Typography className="home__warning">
+            There are still members without answering
+          </Typography>
+        )}
+      </section>
     </main>
   );
 };
