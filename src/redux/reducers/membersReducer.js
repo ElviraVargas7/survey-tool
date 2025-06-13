@@ -1,5 +1,7 @@
 export const GET_MEMBERS_SUCCESS = 'GET MEMBERS SUCCESS';
 export const GET_MEMBERS_FAILURE = 'GET MEMBERS FAILURE';
+export const SET_NEW_MEMBER_SUCCESS = 'SET NEW MEMBER SUCCESS';
+export const SET_NEW_MEMBER_FAILURE = 'SET NEW MEMBER FAILURE';
 
 export const defaultState = {
   currentMembers: [],
@@ -18,6 +20,17 @@ const reducer = (state = defaultState, action) => {
         ...state,
         getMembersSuccessful: false,
         currentMembers: action.payload,
+      };
+    case SET_NEW_MEMBER_SUCCESS:
+      return {
+        ...state,
+        setNewMemberSuccessful: true,
+        currentMembers: action.payload,
+      };
+    case SET_NEW_MEMBER_FAILURE:
+      return {
+        ...state,
+        setNewMemberSuccessful: false,
       };
     default:
       return state;

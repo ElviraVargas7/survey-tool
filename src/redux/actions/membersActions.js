@@ -8,6 +8,9 @@ import {
 import {
   GET_MEMBERS_FAILURE,
   GET_MEMBERS_SUCCESS,
+  selectCurrentMembers,
+  SET_NEW_MEMBER_FAILURE,
+  SET_NEW_MEMBER_SUCCESS,
 } from '../reducers/membersReducer';
 
 export const getMembers = () => async (dispatch) => {
@@ -33,6 +36,35 @@ export const getMembers = () => async (dispatch) => {
 
     return {
       getMembersSuccessful: false,
+    };
+  } finally {
+    dispatch(unsetAppLoadingState());
+  }
+};
+
+export const createMember = (member) => async (dispatch, getState) => {
+  try {
+    dispatch(setAppLoadingState());
+    const currentMembers = selectCurrentMembers(getState());
+    const { data: newMember } = await post('/members', member);
+
+    console.log('members action', newMember);
+
+    dispatch({
+      type: SET_NEW_MEMBER_SUCCESS,
+      payload: [...currentMembers, newMember],
+    });
+
+    return {
+      setNewMemberSuccessful: true,
+    };
+  } catch {
+    dispatch({
+      type: SET_NEW_MEMBER_FAILURE,
+    });
+
+    return {
+      setNewMemberSuccessful: false,
     };
   } finally {
     dispatch(unsetAppLoadingState());
