@@ -6,6 +6,8 @@ import {
   unsetAppLoadingState,
 } from './uiControlFlowActions';
 import {
+  GET_AVERAGE_ANSWERS_FAILURE,
+  GET_AVERAGE_ANSWERS_SUCCESS,
   SUBMIT_ANSWERS_FAILURE,
   SUBMIT_ANSWERS_SUCCESS,
 } from '../reducers/answersReducer';
@@ -56,3 +58,31 @@ export const submitAnswers =
       dispatch(unsetAppLoadingState());
     }
   };
+
+export const getAnalysis = () => async (dispatch) => {
+  try {
+    dispatch(setAppLoadingState());
+    const { data: analysis } = await get(`/answers/averages`);
+
+    console.log('analysis action', analysis);
+
+    dispatch({
+      type: GET_AVERAGE_ANSWERS_SUCCESS,
+      payload: analysis,
+    });
+
+    return {
+      getAnalysisSuccessful: true,
+    };
+  } catch {
+    dispatch({
+      type: GET_AVERAGE_ANSWERS_FAILURE,
+    });
+
+    return {
+      getAnalysisSuccessful: false,
+    };
+  } finally {
+    dispatch(unsetAppLoadingState());
+  }
+};
