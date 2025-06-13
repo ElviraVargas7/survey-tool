@@ -1,11 +1,12 @@
 import { createMember } from '@/redux/actions/membersActions';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Input, Button } from '@mui/material';
+import { Input, Button, Typography } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
-const MemberInput = () => {
+const MemberInput = ({ members }) => {
   const dispatch = useDispatch();
+  const isMaxMembersLength = members.length >= 3;
   const [member, setMember] = useState({
     id: uuidv4(),
     name: '',
@@ -56,10 +57,15 @@ const MemberInput = () => {
       <Button
         variant="contained"
         onClick={handleCreateMember}
-        disabled={member.email == '' || member.name == ''}
+        disabled={member.email == '' || member.name == '' || isMaxMembersLength}
       >
         Create
       </Button>
+      {isMaxMembersLength && (
+        <Typography gutterBottom sx={{ color: 'red', fontSize: 14 }}>
+          You've reached max amount of members
+        </Typography>
+      )}
     </div>
   );
 };

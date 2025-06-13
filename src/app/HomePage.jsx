@@ -28,7 +28,7 @@ const HomePage = () => {
 
   return (
     <main>
-      <MemberInput />
+      <MemberInput members={members} />
       <MembersTable members={members} />
 
       <Box mt={4}>
