@@ -1,40 +1,106 @@
-# survey-tool
+# 📝 Survey Platform - Next.js App
 
-Assessment Case: Leadership Feedback Survey Tool
+This project is a survey platform built with **Next.js**, **Redux Toolkit**, and **Material UI**, allowing members to respond to questions and generate downloadable analysis reports.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
 
-## Getting Started
+## 🚀 Features
 
-First, run the development server:
+- ✅ Member creation with validation
+- ✅ Interactive surveys with rating questions
+- ✅ Average result calculations
+- ✅ Conditional rendering based on responses
+- ✅ PDF report download
+- ✅ SASS styling for full UI customization
+
+---
+
+## 📁 Project Structure
+
+/app
+└── HomePage.jsx (HomePage)
+└── survey/[memberGuid]/page.jsx (SurveyPage)
+
+/components
+└── ActionsButtons
+└── MemberInput
+└── MembersTable
+└── Question
+└── QuestionAverage
+
+/axios
+└── api.js
+
+/redux
+├── actions/
+├── reducers/
+└── reducer.js
+
+/scss
+└── \*.scss
+
+---
+
+## 🛠 Tech Stack
+
+| Technology    | Purpose                        |
+| ------------- | ------------------------------ |
+| Next.js       | React framework (SSR, routing) |
+| Redux Toolkit | Global state management        |
+| Material UI   | Pre-built UI components        |
+| SASS (SCSS)   | Custom component styling       |
+| Axios         | API integration                |
+| UUID          | Unique member generation       |
+
+---
+
+## 📦 Installation
 
 ```bash
-npm run dev
+# Clone the repo
+git clone https://github.com/ElviraVargas7/survey-tool.git
+cd survey-tool
+
+# Install dependencies
+npm install
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Running the App
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm run dev
 
-## Learn More
+# or
 
-To learn more about Next.js, take a look at the following resources:
+yarn dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Visit: http://localhost:3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage Overview
 
-## Deploy on Vercel
+🎯 HomePage (/)
+View and create members
+See list of current members
+View average results (if survey is completed)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🧑‍💼 SurveyPage (/survey/[memberGuid])
+Render all questions dynamically
+Each member can only submit once
+Submit button is enabled when all questions are answered
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+
+Create a .env.local file:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+```
+
+Adjust according to the backend endpoint.
+
+## 👨‍💻 Author
+
+Developed by Elvira Vargas 😸
