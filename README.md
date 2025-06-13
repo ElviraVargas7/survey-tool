@@ -69,13 +69,12 @@ yarn install
 
 ## ✨ Running the App
 
+```bash
 # Development
-
 npm run dev
-
 # or
-
 yarn dev
+```
 
 Visit: http://localhost:3000
 
