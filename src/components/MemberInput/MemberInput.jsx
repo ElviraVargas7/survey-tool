@@ -6,11 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 const MemberInput = () => {
   const dispatch = useDispatch();
-  const [newMemberGuid, setNewMemberGuid] = useState(uuidv4());
   const [member, setMember] = useState({
-    id: newMemberGuid,
-    name: null,
-    email: null,
+    id: uuidv4(),
+    name: '',
+    email: '',
     has_answers: false,
   });
 
@@ -18,7 +17,12 @@ const MemberInput = () => {
     console.log('click');
     event.preventDefault();
     const { setNewMemberSuccessful } = await dispatch(createMember(member));
-    setNewMemberGuid(uuidv4());
+    setMember({
+      id: uuidv4(),
+      name: '',
+      email: '',
+      has_answers: false,
+    });
   };
 
   const handleNamesChange = (event) => {
@@ -37,12 +41,22 @@ const MemberInput = () => {
 
   return (
     <div>
-      <Input type="text" placeholder="Names" onChange={handleNamesChange} />
-      <Input type="email" placeholder="Email" onChange={handleEmailChange} />
+      <Input
+        type="text"
+        placeholder="Names"
+        value={member.name}
+        onChange={handleNamesChange}
+      />
+      <Input
+        type="email"
+        placeholder="Email"
+        value={member.email}
+        onChange={handleEmailChange}
+      />
       <Button
         variant="contained"
         onClick={handleCreateMember}
-        disabled={!member.email || !member.name}
+        disabled={member.email == '' || member.name == ''}
       >
         Create
       </Button>

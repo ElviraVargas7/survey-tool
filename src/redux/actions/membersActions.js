@@ -6,6 +6,8 @@ import {
   unsetAppLoadingState,
 } from './uiControlFlowActions';
 import {
+  DELETE_MEMBER_FAILURE,
+  DELETE_MEMBER_SUCCESS,
   GET_MEMBERS_FAILURE,
   GET_MEMBERS_SUCCESS,
   selectCurrentMembers,
@@ -46,7 +48,7 @@ export const createMember = (member) => async (dispatch, getState) => {
   try {
     dispatch(setAppLoadingState());
     const currentMembers = selectCurrentMembers(getState());
-    const { data: newMember } = await post('/members', member);
+    const { data: newMember } = await post(`/members`, member);
 
     console.log('members action', newMember);
 
@@ -65,6 +67,37 @@ export const createMember = (member) => async (dispatch, getState) => {
 
     return {
       setNewMemberSuccessful: false,
+    };
+  } finally {
+    dispatch(unsetAppLoadingState());
+  }
+};
+
+export const deleteMember = (memberEmail) => async (dispatch, getState) => {
+  try {
+    dispatch(setAppLoadingState());
+    const currentMembers = selectCurrentMembers(getState());
+    await del(`/members/${memberEmail}`);
+
+    const updatedMembers = currentMembers.filter(
+      (member) => member.email !== memberEmail
+    );
+
+    dispatch({
+      type: DELETE_MEMBER_SUCCESS,
+      payload: updatedMembers,
+    });
+
+    return {
+      deleteMemberSuccessful: true,
+    };
+  } catch {
+    dispatch({
+      type: DELETE_MEMBER_FAILURE,
+    });
+
+    return {
+      deleteMemberSuccessful: false,
     };
   } finally {
     dispatch(unsetAppLoadingState());

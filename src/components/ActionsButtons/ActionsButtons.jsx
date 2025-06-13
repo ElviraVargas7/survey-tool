@@ -1,10 +1,21 @@
+import { deleteMember } from '@/redux/actions/membersActions';
+import { Button } from '@mui/material';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-const ActionsButtons = () => {
+const ActionsButtons = ({ memberEmail }) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteMember = () => {
+    console.log(memberEmail);
+    dispatch(deleteMember(memberEmail));
+  };
+
   return (
     <div>
-      <button>Edit</button>
-      <button>Delete</button>
+      <Button variant="outlined" color="error" onClick={handleDeleteMember}>
+        Delete
+      </Button>
     </div>
   );
 };
