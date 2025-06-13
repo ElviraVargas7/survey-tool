@@ -2,6 +2,8 @@ export const SUBMIT_ANSWERS_SUCCESS = 'SUBMIT ANSWERS SUCCESS';
 export const SUBMIT_ANSWERS_FAILURE = 'SUBMIT ANSWERS FAILURE';
 export const GET_AVERAGE_ANSWERS_SUCCESS = 'GET AVERAGE ANSWERS SUCCESS';
 export const GET_AVERAGE_ANSWERS_FAILURE = 'GET AVERAGE ANSWERS FAILURE';
+export const DOWNLOAD_REPORT_SUCCESS = 'DOWNLOAD REPORT SUCCESS';
+export const DOWNLOAD_REPORT_FAILURE = 'DOWNLOAD REPORT FAILURE';
 
 export const defaultState = {
   submitAnswersSuccess: false,
@@ -31,6 +33,16 @@ const reducer = (state = defaultState, action) => {
         ...state,
         getAverageAnalysisSuccess: false,
         averageAnalysis: [],
+      };
+    case DOWNLOAD_REPORT_SUCCESS:
+      return {
+        ...state,
+        downloadReportSuccess: true,
+      };
+    case DOWNLOAD_REPORT_FAILURE:
+      return {
+        ...state,
+        downloadReportSuccess: false,
       };
     default:
       return state;

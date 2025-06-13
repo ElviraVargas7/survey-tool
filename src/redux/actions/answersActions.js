@@ -86,3 +86,29 @@ export const getAnalysis = () => async (dispatch) => {
     dispatch(unsetAppLoadingState());
   }
 };
+
+export const downloadReport = () => async (dispatch) => {
+  try {
+    dispatch(setAppLoadingState());
+    const response = await get('/answers/averages/report', {
+      responseType: 'blob',
+    });
+
+    const blob = new Blob([response.data], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'survey_report.pdf');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    return { downloadReportSuccessful: true };
+  } catch (error) {
+    console.error('Download failed:', error);
+    return { downloadReportSuccessful: false };
+  } finally {
+    dispatch(unsetAppLoadingState());
+  }
+};

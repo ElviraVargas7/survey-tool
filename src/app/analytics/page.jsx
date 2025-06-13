@@ -3,7 +3,7 @@
 import QuestionAverage from '@/components/QuestionAverage/QuestionAverage';
 import { getAnalysis } from '@/redux/actions/answersActions';
 import { selectAverageAnalysis } from '@/redux/reducers/answersReducer';
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -33,7 +33,7 @@ export default function Analytics() {
               </div>
             );
           })}
-          <button>Download report</button>
+          <Button>Download report</Button>
         </>
       ) : (
         <Typography>There are still members without answering</Typography>
